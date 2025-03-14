@@ -1,35 +1,73 @@
-# ProyectoFinal
-Proyecto final para la certificación de Samsung
+# Análisis de Satisfacción del Cliente
 
-Cosas a entregar
-- Codigo del proyecto
-- Word respondiendo las preguntas
-- PPT para defender el proyecto
-- Video de 60 segs sobre el proyecto
+Este proyecto tiene como objetivo analizar la satisfacción del cliente utilizando datos de retroalimentación. Actualmente, muchas empresas tienen dificultades para comprender las opiniones de sus clientes y mejorar sus servicios de manera eficiente. Esto demuestra que la falta de análisis adecuados puede reducir la lealtad del cliente y afectar las ventas. Nuestra propuesta busca resolver este problema a través del uso de técnicas de Machine Learning y análisis de datos para identificar patrones en la satisfacción del cliente y sugerir mejoras basadas en estos hallazgos.
 
-1.	Nombre y función de los miembros del equipo
-Nombre de los Integrantes	Papel a desempeñar en el equipo
- 	 
-2.	Nombre del proyecto
-Escribe el nombre del proyecto seleccionado del banco de proyectos o propuesta que construirá tu equipo.
+## Tabla de contenidos
 
-3.	Nombre del equipo
-Escribe el nombre del equipo con el que se van a identificar en la realización de la propuesta
- 
-4.	Descripción del proyecto
-Describa en qué consistirá el proyecto o propuesta de su equipo. Describa el problema que le gustaría resolver (incluya cualquier dato que pueda tener para apoyar que este problema existe) y el concepto general para resolver este problema).
+1. [Nombre](#Nombre)
+2. [Descripción](#descripción)
+3. [Arquitectura](#Arquitectura)
+4. [Proceso](#Proceso)
+5. [Funcionalidades](#Funcionalidades)
+6. [Estado del proyecto](#EstadoDelProyecto)
+7. [Agradecimientos](#Agradecimientos)
 
-a.	¿Qué valor social genera su idea (medioambiental, social, financiero, etc.)?
 
-b.	¿Hay alguna consideración que deba tenerse en cuenta para la comunidad (¿cómo crees que le beneficiaría a la comunidad esta idea, afecta negativamente a alguna persona?) 
+* Nombre del proyecto
 
-c.	¿Cómo afectará a la comunidad (positiva o negativamente)?
+Análisis de Satisfacción del Cliente
 
-d.	¿Alguna pregunta pendiente y/o suposición a la que pueda responder sobre su idea?
+* Breve descripción del proyecto -> Alguna imagen o gif que muestre el proyecto
 
-e.	¿Cuáles son las preguntas más importantes que quedan por responder antes de seguir desarrollando esta idea?
+Se presenta un modelo entrenado de IA que utiliza las caracteristicas brindadas para predecir el nivel de satisfaccion que tendra un cliente.
 
-f.	¿Cuál es el objetivo principal o la métrica sobre la que intenta influir con esta prueba (por ejemplo, compras, valor medio de los pedidos, envío de formularios, etc.)?
+![alt text](/imgs/image.png)
 
-g.	Indica, por qué consideras que tu proyecto es novedoso
+* Arquitectura del proyecto + imagen
+
+El modelo de IA utiliza diferentes tecnicas aprendidas durante el curso, dentro de las cuales estan:
+    - Analisis y limpieza de datos
+    - Generacion de datos artificales con KernelDensity
+    - Escalado de datos con StandardScaler y OneHotEncoder
+    - Reduccion de complejidad con PCA
+    - Aplicacion de distintos modelos como RandomForest, GradientBoost y Redes Neuronales
+    - Ensamblaje de modelos con VotingRegressor
+
+![alt text](/imgs/image-1.png)   
+
+* Proceso de desarrollo:
+
+-Fuente del dataset
+
+data = kagglehub.dataset_download("jahnavipaliwal/customer-feedback-and-satisfaction")
+file_path = os.path.join(data, "customer_feedback_satisfaction.csv")
+
+-Limpieza de datos (img que lo valide)
+
+    - Validacion de datos null
+    - Validacion de datos duplicados
+    - Eliminar columnas innecesarias
+    - Convertir variables categoricas a numericas
+    - Escalar magnitudes para evitar sesgo 
+
+![alt text](/imgs/image-2.png)
+
+-Manejo excepciones/control errores
+
+    - Se eliminan los posibles errores en la limpieza de los datos
+
+![alt text](/imgs/image-3.png)
+
+-Estadísticos (Valores, gráficos, …)
+
+    - Se incluyen 7 analisis diferentes antes del procesamiento de los datos
+    - Se realiza un analisis final de perdida al finalizar el entrenamiento de la IA
+
+![alt text](/imgs/image-4.png)
+
+* Funcionalidades extra:
+
+Ejem 1: Integración del proyecto en una pág web
+- Tecnología/Herramientas usadas …
+- Arquitectura (img)
 
