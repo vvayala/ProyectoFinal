@@ -550,15 +550,15 @@
 
         // Función para enviar la predicción a la API
         async function sendPrediction() {
-            const feature1 = parseFloat(document.getElementById('feature1').value);
-            const feature2 = parseFloat(document.querySelector('input[name="feature2"]:checked').value);
-            const feature3 = parseFloat(document.getElementById('feature3').value);
+            const feature1 = parseInt(document.getElementById('feature1').value);
+            const feature2 = document.querySelector('input[name="feature2"]:checked').value;
+            const feature3 = document.getElementById('feature3').value;
             const feature4 = parseFloat(document.getElementById('feature4').value);
-            const feature5 = parseFloat(document.getElementById('feature5').value);
-            const feature6 = parseFloat(document.getElementById('feature6').value);
-            const feature7 = parseFloat(document.getElementById('feature7').value);
-            const feature8 = parseFloat(document.getElementById('feature8').value);
-            const feature9 = parseFloat(document.getElementById('feature9').value);
+            const feature5 = parseInt(document.getElementById('feature5').value);
+            const feature6 = parseInt(document.getElementById('feature6').value);
+            const feature7 = parseInt(document.getElementById('feature7').value);
+            const feature8 = document.getElementById('feature8').value;
+            const feature9 = document.getElementById('feature9').value;
 
             const inputData = [feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9];
             
