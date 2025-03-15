@@ -469,7 +469,7 @@
                     <br><br>
 
                     <label for="feature4">Ingresos anuales:</label>
-                    <input type="number" id="feature4" name="feature4" required min="1000" max="1000000">
+                    <input type="number" id="feature4" name="feature4" required min="0" max="1000000">
 
                     <label for="feature5">Calidad del producto:</label>
                     <input type="number" id="feature5" name="feature5" required, min="1" max="10">
@@ -551,7 +551,7 @@
         // Función para enviar la predicción a la API
         async function sendPrediction() {
             const feature1 = parseFloat(document.getElementById('feature1').value);
-            const feature2 = parseFloat(document.getElementById('feature2').value);
+            const feature2 = parseFloat(document.querySelector('input[name="feature2"]:checked').value);
             const feature3 = parseFloat(document.getElementById('feature3').value);
             const feature4 = parseFloat(document.getElementById('feature4').value);
             const feature5 = parseFloat(document.getElementById('feature5').value);
@@ -559,13 +559,9 @@
             const feature7 = parseFloat(document.getElementById('feature7').value);
             const feature8 = parseFloat(document.getElementById('feature8').value);
             const feature9 = parseFloat(document.getElementById('feature9').value);
-            const feature10 = parseFloat(document.getElementById('feature10').value);
-            const feature11 = parseFloat(document.getElementById('feature11').value);
-            const feature12 = parseFloat(document.getElementById('feature12').value);
-            const feature13 = parseFloat(document.getElementById('feature13').value);
 
-            const inputData = [feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9, feature10, feature11, feature12, feature13];
-
+            const inputData = [feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9];
+            
             try {
                 const response = await fetch("http://127.0.0.1:5000/predict", {
                     method: "POST",
