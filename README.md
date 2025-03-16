@@ -1,6 +1,6 @@
 # Análisis de Satisfacción del Cliente
 
-Este proyecto tiene como objetivo analizar la satisfacción del cliente utilizando datos de retroalimentación. Actualmente, muchas empresas tienen dificultades para comprender las opiniones de sus clientes y mejorar sus servicios de manera eficiente. Esto demuestra que la falta de análisis adecuados puede reducir la lealtad del cliente y afectar las ventas. Nuestra propuesta busca resolver este problema a través del uso de técnicas de Machine Learning y análisis de datos para identificar patrones en la satisfacción del cliente y sugerir mejoras basadas en estos hallazgos.
+Muchas empresas enfrentan dificultades para interpretar la satisfacción de sus clientes, afectando la experiencia del consumidor y en consecuencia, las ventas de sus negocios. Valora+ resuelve este problema mediante el uso de inteligencia artificial y aprendizaje automático para analizar datos y detectar patrones en la satisfacción del cliente. Proporcionamos información accionable que ayuda a las empresas a mejorar sus servicios, fortalecer la fidelidad de los clientes y fomentar el crecimiento sostenible.
 
 ## Tabla de contenidos
 
@@ -15,11 +15,12 @@ Este proyecto tiene como objetivo analizar la satisfacción del cliente utilizan
 
 * Nombre del proyecto
 
-Análisis de Satisfacción del Cliente
+Valora+
+Análisis de Satisfacción del Cliente con IA: Soluciones Basadas en Datos
 
 * Breve descripción del proyecto -> Alguna imagen o gif que muestre el proyecto
 
-Se presenta un modelo entrenado de IA que utiliza las caracteristicas brindadas para predecir el nivel de satisfaccion que tendra un cliente.
+En la sección de galería, se incluyen gráficos interactivos que facilitan la visualización de tendencias, patrones y relaciones clave identificadas en los datos recopilados. Estos recursos permiten una comprensión más profunda y accesible de la información analizada. Asimismo, ponemos a disposición un modelo predictivo avanzado, entrenado mediante técnicas de inteligencia artificial. Este modelo es capaz de prever el nivel de satisfacción del cliente en función de las características proporcionadas, ofreciendo una herramienta poderosa para la toma de decisiones estratégicas basadas en datos.
 
 ![alt text](/imgs/image.png)
 
@@ -55,6 +56,7 @@ file_path = os.path.join(data, "customer_feedback_satisfaction.csv")
 -Manejo excepciones/control errores
 
     - Se eliminan los posibles errores en la limpieza de los datos
+    - Utilizacion de try/catch en el sitio web
 
 ![alt text](/imgs/image-3.png)
 
@@ -67,7 +69,11 @@ file_path = os.path.join(data, "customer_feedback_satisfaction.csv")
 
 * Funcionalidades extra:
 
-Ejem 1: Integración del proyecto en una pág web
-- Tecnología/Herramientas usadas …
-- Arquitectura (img)
+Se ha creado un sitio web que incluye:
+- Informacion sobre el proyecto  
+- Galeria de analisis
+- Prediccion de satisfaccion
 
+En la creacion del sitio web se ha utilizado html, css y js.
+
+![alt text](/imgs/image-5.png)
