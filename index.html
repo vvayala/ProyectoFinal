@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Proyecto Educando 2.0 - Single Page Application">
-    <title>Educando 2.0</title>
+    <meta name="description" content="Valora+ - Single Page Application">
+    <title>Valora+</title>
     <!-- Fuentes de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <!-- Ícono de menú hamburguesa -->
@@ -381,7 +381,7 @@
 
     <!-- Menú lateral -->
     <div class="sidebar" id="sidebar">
-        <h2>Educando 2.0</h2>
+        <h2>Valora+</h2>
         <button onclick="navigateTo('about')">Acerca de</button>
         <button onclick="navigateTo('gallery')">Galería</button>
         <button onclick="navigateTo('prediction')">Predicción</button>
@@ -392,20 +392,23 @@
         <!-- Sección "Acerca de" -->
         <div id="about" class="page active">
             <div class="about-section">
-                <h1>Acerca de Nuestro Proyecto</h1>
+                <h1>Valora+</h1>
+                <h2>Análisis de Satisfacción del Cliente con IA: Soluciones Basadas en Datos</h2>
+                <h2><br>Nosotros</h2>
                 <p>
-                    Este proyecto tiene como objetivo analizar la satisfacción del cliente utilizando datos de retroalimentación.
-                    Actualmente, muchas empresas tienen dificultades para comprender las opiniones de sus clientes y mejorar sus
-                    servicios de manera eficiente. Esto demuestra que la falta de análisis adecuado para reducir la lealtad del
-                    cliente y afectar las ventas. Nuestra propuesta busca resolver este problema a través del uso de técnicas de
-                    Machine Learning y análisis de datos para identificar patrones en la satisfacción del cliente y sugerir mejoras
-                    basadas en estos hallazgos.
+                    Muchas empresas enfrentan dificultades para interpretar la satisfacción de sus clientes, afectando la experiencia del consumidor y en consecuencia, las ventas de sus negocios. 
+                    Valora+ resuelve este problema mediante el uso de inteligencia artificial y aprendizaje automático para analizar datos y detectar patrones 
+                    en la satisfacción del cliente. Proporcionamos información accionable que ayuda a las empresas a mejorar sus servicios, fortalecer la fidelidad de los clientes y 
+                    fomentar el crecimiento sostenible.    
+                
                 </p>
+                <h2>Nuestros Proyectos</h2>
                 <p>
-                    En esta pagina, presentamos algunos de los gráficos más relevantes que hemos generado a partir de nuestros
-                    análisis. Estos gráficos ayudan a visualizar tendencias, patrones y relaciones clave en los datos recopilados.
-                    Así tambien presentamos un modelo entrenado capaz de predecir la satisfacción del cliente en funcion de las 
-                    caracteristicas proporcionadas.
+                    En la sección de galería, se incluyen gráficos interactivos que facilitan la visualización de tendencias, patrones y relaciones clave identificadas en los datos recopilados. 
+                    Estos recursos permiten una comprensión más profunda y accesible de la información analizada.
+                    Asimismo, ponemos a disposición un modelo predictivo avanzado, entrenado mediante técnicas de inteligencia artificial. 
+                    Este modelo es capaz de prever el nivel de satisfacción del cliente en función de las características proporcionadas, 
+                    ofreciendo una herramienta poderosa para la toma de decisiones estratégicas basadas en datos.
                 </p>
             </div>
         </div>
@@ -578,8 +581,9 @@
                 }
 
                 const result = await response.json();
+                result.prediction = Math.max(0, Math.min(100, result.prediction));
                 document.getElementById('predictionResult').textContent =
-                    `Predicción de Satisfacción: ${result.prediction}`;
+                    `Predicción de Satisfacción: ${Math.round(result.prediction,2)}%`;
             } catch (error) {
                 console.error("Error en la predicción:", error);
                 document.getElementById('predictionResult').textContent =
@@ -587,6 +591,10 @@
             }
         })
 
+        document.getElementById('predictionForm').addEventListener('reset', async (e) => {
+            document.getElementById('predictionResult').textContent =
+                    ``;
+        })
 
         // Función para abrir el modal y mostrar la imagen en grande
         function openModal(imageSrc) {
