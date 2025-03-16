@@ -5,7 +5,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
@@ -13,6 +13,8 @@ CORS(app)
 # Cargar el modelo al iniciar la API
 try:
     model = joblib.load('modelo_entrenado.pkl')
+    escalar = joblib.load('modelo_escalado.pkl')
+    pca = joblib.load('modelo_pca.pkl')
     print("Modelo cargado correctamente.")
 except Exception as e:
     print(f"Error al cargar el modelo: {e}")
@@ -22,25 +24,21 @@ except Exception as e:
 def predict():
     try:
         # Obtener los datos de la solicitud
-        data = request.json['data'] 
         #Se reciben las 9 caracteristicas iniciales
+        data = request.json['data'] 
+        columnas = ['Age','Gender','Country','Income','ProductQuality','ServiceQuality','PurchaseFrequency','FeedbackScore','LoyaltyLevel']
+        
         #Procesar los datos recibidos antes de pasarlos al modelo
-        #Escalar los datos tanto numericos como categoricos
-        escalado = ColumnTransformer(
-            transformers=[
-                ('num', StandardScaler(), ['Age','Income','ProductQuality','ServiceQuality','PurchaseFrequency']),
-                ('cat', OneHotEncoder(), ['Gender', 'Country','FeedbackScore','LoyaltyLevel'])
-            ])
+        df = pd.DataFrame([data], columns=columnas)
 
-        #Ajustarlos al modelo (18 caracteristicas)
-        X = escalado.fit_transform(data)
+        #Escalar los datos tanto numericos como categoricos
+        datos_escalados = escalar.transform(df) #18 caracteristicas
 
         #Aplicar PCA para reducir la complejidad (13 caracteristicas)
-        pca = PCA(n_components=0.95)  # Retener el 95% de la varianza
-        X_final_pca = pca.fit_transform(X)
+        datos_finales = pca.transform(datos_escalados)
 
         # Hacer la predicción
-        prediction = model.predict([X_final_pca])
+        prediction = model.predict(datos_finales)
         
         # Devolver la predicción como respuesta
         return jsonify({'prediction': prediction.tolist()})
