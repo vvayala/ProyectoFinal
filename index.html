@@ -9,370 +9,371 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <!-- Ícono de menú hamburguesa -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Estilos generales */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Textura de papel */
-            background-color: #f9f9f9; /* Color de respaldo */
-            margin: 0;
-            padding: 0;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        /* Botón de menú hamburguesa */
-        .menu-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #6c5ce7; /* Morado moderno */
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1000;
-            transition: background-color 0.3s ease;
-        }
-
-        .menu-toggle:hover {
-            background-color: #5a4fcf; /* Morado más oscuro al pasar el mouse */
-        }
-
-        .menu-toggle.hidden {
-            display: none; /* Oculta el ícono de hamburguesa */
-        }
-
-        /* Menú lateral */
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #2d3436; /* Gris oscuro elegante */
-            color: white;
-            padding: 40px 20px;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
-            position: fixed;
-            top: 0;
-            left: -250px; /* Oculta el menú por defecto */
-            transition: left 0.3s ease;
-            z-index: 999;
-        }
-
-        .sidebar.active {
-            left: 0; /* Muestra el menú */
-        }
-
-        .sidebar h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: #fff;
-            text-align: center;
-        }
-
-        .sidebar button {
-            background-color: #6c5ce7; /* Morado moderno */
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 80%;
-            margin-bottom: 15px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            font-weight: 500;
-        }
-
-        .sidebar button:hover {
-            background-color: #5a4fcf; /* Morado más oscuro al pasar el mouse */
-            transform: translateY(-3px);
-        }
-
-        /* Contenido principal */
-        .main-content {
-            padding: 40px;
-            margin-left: 0; /* Ajuste inicial */
-            transition: margin-left 0.3s ease;
-        }
-
-        .main-content.shifted {
-            margin-left: 250px; /* Desplaza el contenido cuando el menú está activo */
-        }
-
-        /* Secciones */
-        .page {
-            display: none; /* Oculta todas las secciones por defecto */
-        }
-
-        .page.active {
-            display: block; /* Muestra la sección activa */
-        }
-
-        /* Estilos para la sección "Acerca de" */
-        .about-section {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-section h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .about-section p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        /* Estilos para la sección "Galería" */
-        .gallery-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .gallery-section h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .gallery-item {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            flex: 1 1 calc(30% - 40px);
-            max-width: 300px;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .gallery img {
-            width: 100%;
-            height: auto;
-            border-bottom: 4px solid #6c5ce7; /* Morado moderno */
-            cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
-        }
-
-        .gallery p {
-            padding: 15px;
-            font-size: 1.1rem;
-            color: #34495e;
-            margin: 0;
-            background-color: #ecf0f1;
-            border-top: 2px solid #bdc3c7;
-            text-align: center;
-        }
-
-        /* Estilos para la sección "Predicción" */
-        .prediction-section {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .prediction-section h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .prediction-section label {
-            display: block;
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .prediction-section input {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .prediction-section button {
-            background-color: #6c5ce7; /* Morado moderno */
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            font-weight: 500;
-        }
-
-        .prediction-section button:hover {
-            background-color: #5a4fcf; /* Morado más oscuro al pasar el mouse */
-            transform: translateY(-3px);
-        }
-
-        .prediction-result {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: #2c3e50;
-            text-align: center;
-        }
-
-        .prediction-section select {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            background-color: white;
-            color: #333; 
-            cursor: pointer; /* Añade un cursor de tipo mano */
-        }
-
-        .prediction-section input[type="radio"] {
-            width: auto; 
-            padding: 10px; 
-            font-size: 1rem; 
-            border: 1px solid #ccc; 
-            border-radius: 50%; 
-            margin-bottom: 20px; 
-            accent-color: #6c5ce7; 
-            cursor: pointer; 
-        }
-
-        /* Estilos para el modal */
-        .modal {
-            display: none; /* Oculta el modal por defecto */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro */
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            display: block;
-            margin: auto;
-            max-width: 90%; /* Aumenta el tamaño máximo de la imagen */
-            max-height: 90vh; /* Limita la altura al 90% de la ventana */
-            border-radius: 12px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* Centra la imagen */
-        }
-
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Responsividad */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-                padding: 20px 10px;
-            }
-
-            .sidebar h2 {
-                font-size: 1.5rem;
-            }
-
-            .sidebar button {
-                width: 90%;
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-
-            .main-content {
-                padding: 20px;
-            }
-
-            .gallery-item {
-                flex: 1 1 calc(50% - 20px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sidebar {
-                width: 100%;
-                padding: 20px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .sidebar h2 {
-                margin-bottom: 20px;
-            }
-
-            .sidebar button {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-            .main-content {
-                padding: 20px;
-            }
-
-            .gallery-item {
-                flex: 1 1 100%;
-            }
-        }
-    </style>
 </head>
+
+<style>
+      /* Estilos generales */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Textura de papel */
+    background-color: #f9f9f9; /* Color de respaldo */
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Botón de menú hamburguesa */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #6c5ce7; /* Morado moderno */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.menu-toggle:hover {
+    background-color: #5a4fcf; /* Morado más oscuro al pasar el mouse */
+}
+
+.menu-toggle.hidden {
+    display: none; /* Oculta el ícono de hamburguesa */
+}
+
+/* Menú lateral */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2d3436; /* Gris oscuro elegante */
+    color: white;
+    padding: 40px 20px;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: -250px; /* Oculta el menú por defecto */
+    transition: left 0.3s ease;
+    z-index: 999;
+}
+
+.sidebar.active {
+    left: 0; /* Muestra el menú */
+}
+
+.sidebar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #fff;
+    text-align: center;
+}
+
+.sidebar button {
+    background-color: #6c5ce7; /* Morado moderno */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar button:hover {
+    background-color: #5a4fcf; /* Morado más oscuro al pasar el mouse */
+    transform: translateY(-3px);
+}
+
+/* Contenido principal */
+.main-content {
+    padding: 40px;
+    margin-left: 0; /* Ajuste inicial */
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.shifted {
+    margin-left: 250px; /* Desplaza el contenido cuando el menú está activo */
+}
+
+/* Secciones */
+.page {
+    display: none; /* Oculta todas las secciones por defecto */
+}
+
+.page.active {
+    display: block; /* Muestra la sección activa */
+}
+
+/* Estilos para la sección "Acerca de" */
+.about-section {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.about-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* Estilos para la sección "Galería" */
+.gallery-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.gallery-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1 1 calc(30% - 40px);
+    max-width: 300px;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-bottom: 4px solid #6c5ce7; /* Morado moderno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+}
+
+.gallery p {
+    padding: 15px;
+    font-size: 1.1rem;
+    color: #34495e;
+    margin: 0;
+    background-color: #ecf0f1;
+    border-top: 2px solid #bdc3c7;
+    text-align: center;
+}
+
+/* Estilos para la sección "Predicción" */
+.prediction-section {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco translúcido */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.prediction-section label {
+    display: block;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.prediction-section input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.prediction-section button {
+    background-color: #6c5ce7; /* Morado moderno */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: 500;
+}
+
+.prediction-section button:hover {
+    background-color: #5a4fcf; /* Morado más oscuro al pasar el mouse */
+    transform: translateY(-3px);
+}
+
+.prediction-result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.prediction-section select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: white;
+    color: #333; 
+    cursor: pointer; /* Añade un cursor de tipo mano */
+}
+
+.prediction-section input[type="radio"] {
+    width: auto; 
+    padding: 10px; 
+    font-size: 1rem; 
+    border: 1px solid #ccc; 
+    border-radius: 50%; 
+    margin-bottom: 20px; 
+    accent-color: #6c5ce7; 
+    cursor: pointer; 
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none; /* Oculta el modal por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro */
+    padding-top: 60px;
+}
+
+.modal-content {
+    display: block;
+    margin: auto;
+    max-width: 90%; /* Aumenta el tamaño máximo de la imagen */
+    max-height: 90vh; /* Limita la altura al 90% de la ventana */
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centra la imagen */
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        padding: 20px 10px;
+    }
+
+    .sidebar h2 {
+        font-size: 1.5rem;
+    }
+
+    .sidebar button {
+        width: 90%;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .gallery-item {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+        margin-bottom: 20px;
+    }
+
+    .sidebar button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .gallery-item {
+        flex: 1 1 100%;
+    }
+}
+</style>
 <body>
 
     <!-- Botón de menú hamburguesa -->
@@ -460,6 +461,7 @@
 
                     <label for="feature3">Pais:</label>
                     <select name="feature3" id="feature3" required>
+                        <option value="" selected>Seleccionar</option>
                         <option value="USA">Estados Unidos</option>
                         <option value="Canada">Canada</option>
                         <option value="UK">Reino Unido</option>
@@ -469,10 +471,10 @@
                     <br><br>
 
                     <label for="feature4">Ingresos anuales:</label>
-                    <input type="number" id="feature4" name="feature4" required min="0" max="1000000">
+                    <input type="number" id="feature4" name="feature4" required min="0" max="1000000" >
 
                     <label for="feature5">Calidad del producto:</label>
-                    <input type="number" id="feature5" name="feature5" required, min="1" max="10">
+                    <input type="number" id="feature5" name="feature5" min="1" max="10" required>
 
                     <label for="feature6">Calidad del servicio:</label>
                     <input type="number" id="feature6" name="feature6" required min="1" max="10">
@@ -482,6 +484,7 @@
 
                     <label for="feature8">Feedback:</label>
                     <select name="feature8" id="feature8" required>
+                        <option value="" selected>Seleccionar</option>
                         <option value="Low">Bajo</option>
                         <option value="Medium">Medio</option>
                         <option value="High">Alto</option>
@@ -490,13 +493,14 @@
                     
                     <label for="feature9">Programa de lealtad:</label>
                     <select name="feature9" id="feature9" required>
+                        <option value="" selected>Seleccionar</option>
                         <option value="Bronze">Bronce</option>
                         <option value="Silver">Plata</option>
                         <option value="Gold">Oro</option>
                     </select> 
                     <br><br>
 
-                    <button type="button" onclick="sendPrediction()">Evaluar</button>
+                    <button type="submit" >Evaluar</button>
                     <br><br>
                     <button type="reset">Limpiar</button>
 
@@ -511,7 +515,6 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
-
     <script>
         // Función para mostrar/ocultar el menú
         function toggleMenu() {
@@ -548,20 +551,21 @@
             document.getElementById(pageId).classList.add('active');
         }
 
-        // Función para enviar la predicción a la API
-        async function sendPrediction() {
-            const feature1 = parseInt(document.getElementById('feature1').value);
-            const feature2 = document.querySelector('input[name="feature2"]:checked').value;
-            const feature3 = document.getElementById('feature3').value;
-            const feature4 = parseFloat(document.getElementById('feature4').value);
-            const feature5 = parseInt(document.getElementById('feature5').value);
-            const feature6 = parseInt(document.getElementById('feature6').value);
-            const feature7 = parseInt(document.getElementById('feature7').value);
-            const feature8 = document.getElementById('feature8').value;
-            const feature9 = document.getElementById('feature9').value;
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
 
-            const inputData = [feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9];
-            
+            const inputData = [
+                parseInt(form.elements['feature1'].value),
+                form.elements['feature2'].value,
+                form.elements['feature3'].value,
+                parseFloat(form.elements['feature4'].value),
+                parseInt(form.elements['feature5'].value),
+                parseInt(form.elements['feature6'].value),
+                parseInt(form.elements['feature7'].value),
+                form.elements['feature8'].value,
+                form.elements['feature9'].value,
+            ];
             try {
                 const response = await fetch("http://127.0.0.1:5000/predict", {
                     method: "POST",
@@ -574,14 +578,15 @@
                 }
 
                 const result = await response.json();
-                document.getElementById('predictionResult').textContent = 
+                document.getElementById('predictionResult').textContent =
                     `Predicción de Satisfacción: ${result.prediction}`;
             } catch (error) {
                 console.error("Error en la predicción:", error);
-                document.getElementById('predictionResult').textContent = 
+                document.getElementById('predictionResult').textContent =
                     "Error al obtener la predicción. Por favor, inténtalo de nuevo.";
             }
-        }
+        })
+
 
         // Función para abrir el modal y mostrar la imagen en grande
         function openModal(imageSrc) {
@@ -604,7 +609,42 @@
 
         // Mostrar la sección "Acerca de" por defecto
         showPage('about');
-    </script>
 
+        // Función para enviar la predicción a la API
+        async function sendPrediction() {
+            const feature1 = parseInt(document.getElementById('feature1').value);
+            const feature2 = document.querySelector('input[name="feature2"]:checked').value;
+            const feature3 = document.getElementById('feature3').value;
+            const feature4 = parseFloat(document.getElementById('feature4').value);
+            const feature5 = parseInt(document.getElementById('feature5').value);
+            const feature6 = parseInt(document.getElementById('feature6').value);
+            const feature7 = parseInt(document.getElementById('feature7').value);
+            const feature8 = document.getElementById('feature8').value;
+            const feature9 = document.getElementById('feature9').value;
+
+            const inputData = [feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9];
+
+            try {
+                const response = await fetch("http://127.0.0.1:5000/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ data: inputData })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error en la solicitud: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                document.getElementById('predictionResult').textContent =
+                    `Predicción de Satisfacción: ${result.prediction}`;
+            } catch (error) {
+                console.error("Error en la predicción:", error);
+                document.getElementById('predictionResult').textContent =
+                    "Error al obtener la predicción. Por favor, inténtalo de nuevo.";
+            }
+        }
+
+    </script>
 </body>
 </html>
